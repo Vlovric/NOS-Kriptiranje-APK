@@ -14,7 +14,7 @@ const createWindow = () => {
     height: 600
   })
 
-  win.loadFile('index.html')
+  win.loadFile('Pocetni/index.html')
 }
 
 app.on('window-all-closed', () => {
