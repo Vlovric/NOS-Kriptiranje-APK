@@ -20,6 +20,14 @@ const fileMap = {
   tajni_kljuc: 'tajni_kljuc.txt',
 };
 
+const filesToClear = [
+  'kriptirani_tekst.txt',
+  'potpis.txt',
+  'sazetak.txt',
+];
+
+const dir = path.join(app.getPath('userData'), 'datoteke');
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
@@ -34,12 +42,19 @@ const createWindow = () => {
 }
 
 function initializeFiles(){
-  const dir = path.join(app.getPath('userData'), 'files');
   fs.ensureDirSync(dir);
 
+  filesToClear.forEach((file) => {
+    const filePath = path.join(dir, file);
+    fs.writeFileSync(filePath, ''); // Clear the file content
+  });
+
+  // Ensure other files exist without clearing them
   files.forEach((file) => {
     const filePath = path.join(dir, file);
-    fs.writeFileSync(filePath, '');
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, ''); // Create the file only if it doesn't exist
+    }
   });
 }
 

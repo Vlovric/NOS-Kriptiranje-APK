@@ -3,11 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <title>Generiranje ključeva</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .column {
+        flex: 1;
+        margin: 10px;
+      }
+      .column textarea {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
+
     <div id="navbar-placeholder"></div>
-    <input type="text" id="inputText" placeholder="Enter text here" />
-    <button id="saveButton">Save</button>
+
+    <div class="container">
+      <div class="column">
+        <h1>Tajni ključ</h1>
+        <textarea id="tajniKljuc" name="tajniKljuc" rows="10" cols="50" readonly></textarea>
+      </div>
+      <div class="column">
+        <h1>Privatni ključ</h1>
+        <textarea id="privatniKljuc" name="privatniKljuc" rows="10" cols="50" readonly></textarea>
+      </div>
+      <div class="column">
+        <h1>Javni ključ</h1>
+        <textarea id="javniKljuc" name="javniKljuc" rows="10" cols="50" readonly></textarea>
+      </div>
+    </div>
 
     <script src="../Navbar/loadNavbar.js"></script>
     <script src="generiranje.js"></script>

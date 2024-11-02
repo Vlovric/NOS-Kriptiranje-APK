@@ -1,11 +1,18 @@
 const { ipcRenderer } = require('electron');
+const crypto = require('crypto');
 
-document.getElementById('saveButton').addEventListener('click', () => {
-  const inputText = document.getElementById('inputText').value;
-  const fileType = 'tajni_kljuc';
-  ipcRenderer.send('write-to-file', { fileType, data: inputText });
+document.addEventListener("DOMContentLoaded", function() {
+    // generirat tajni kljuc, prikazat u textarea i zapisat u file
+    var secretKey = generateSecretKey();
+    var secretKeyTextArea = document.getElementById('tajniKljuc');
+    secretKeyTextArea.value = secretKey;
+    ipcRenderer.send('write-to-file', { fileType: 'tajni_kljuc', data: secretKey });
+
+    //generirat javni i privatni kljuc, prikazat u textarea i zapisat u file
+    
 });
 
-ipcRenderer.on('write-to-file-response', (event, response) => {
-  console.log(response);
-});
+function generateSecretKey(){
+    return crypto.randomBytes(32).toString('hex');
+}
+
