@@ -3,9 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <title>Kriptiranje datoteke</title>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <style>
+      #navbar-placeholder {
+        flex: 0 0 auto;
+      }
+      .content-wrapper {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div id="navbar-placeholder"></div>
+
+    <div class="content-wrapper">
+      <div class="container">
+        <a href="kriptiranje_simetricno.html" class="two_buttons">Simetrično kriptiranje</a>
+        <a href="kriptiranje_asimetricno.html" class="two_buttons">Asimetrično kriptiranje</a>
+      </div>
+    </div>
 
     <script src="../Navbar/loadNavbar.js"></script>
   </body>

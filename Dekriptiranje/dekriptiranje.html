@@ -3,9 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <title>Dekriptiranje datoteke</title>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <style>
+      #navbar-placeholder {
+        flex: 0 0 auto;
+      }
+      .content-wrapper {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <div id="navbar-placeholder"></div>
+
+    <div class="content-wrapper">
+      <div class="container">
+        <a href="dekriptiranje_simetricno.html" class="two_buttons">Simetrično dekriptiranje</a>
+        <a href="dekriptiranje_asimetricno.html" class="two_buttons">Asimetrično dekriptiranje</a>
+      </div>
+    </div>
 
     <script src="../Navbar/loadNavbar.js"></script>
   </body>
