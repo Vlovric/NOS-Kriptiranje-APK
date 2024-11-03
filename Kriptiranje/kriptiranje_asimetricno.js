@@ -18,15 +18,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function encryptText(text) {
         return new Promise((resolve, reject) => {
-            ipcRenderer.send('read-from-file', { fileType: 'privatni_kljuc' });
+            ipcRenderer.send('read-from-file', { fileType: 'javni_kljuc' });
             ipcRenderer.once('read-from-file-reply', (event, data) => {
-                try {
-                    //logika
-                    resolve(encryptedText);
-                } catch (error) {
-                    reject(error);
-                }
+                const { encryptedText, symmetricKey, iv } = symEncryptText(text);
+                const encryptedSymKey = crypto.publicEncrypt(data, symmetricKey).toString('hex');
+                const finalEncryptedText = encryptedSymKey + ':' + iv.toString('hex') + ':' + encryptedText;
+                ipcRenderer.send('write-to-file', { fileType: 'kriptirani_tekst', data: finalEncryptedText });
+                resolve(finalEncryptedText);
             });
         });
+    }
+
+    function symEncryptText(text) {
+        const symmetricKey = crypto.randomBytes(32);
+        const iv = crypto.randomBytes(16);
+        const cipher = crypto.createCipheriv('aes-256-cbc', symmetricKey, iv);
+        let encryptedText = cipher.update(text, 'utf8', 'hex');
+        encryptedText += cipher.final('hex');
+        return { encryptedText, symmetricKey, iv };
     }
 });
