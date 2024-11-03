@@ -30,12 +30,13 @@ const dir = path.join(app.getPath('userData'), 'datoteke');
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 1000,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
+    autoHideMenuBar: true,
   })
 
   win.loadFile('Pocetni/index.html')

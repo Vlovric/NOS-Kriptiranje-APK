@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", function() {
         return new Promise((resolve, reject) => {
             ipcRenderer.send('read-from-file', { fileType: 'javni_kljuc' });
             ipcRenderer.once('read-from-file-reply', (event, data) => {
+                publicKey = data.trim();
                 const { encryptedText, symmetricKey, iv } = symEncryptText(text);
-                const encryptedSymKey = crypto.publicEncrypt(data, symmetricKey).toString('hex');
+                const encryptedSymKey = crypto.publicEncrypt(publicKey, symmetricKey).toString('hex');
                 const finalEncryptedText = encryptedSymKey + ':' + iv.toString('hex') + ':' + encryptedText;
                 ipcRenderer.send('write-to-file', { fileType: 'kriptirani_tekst', data: finalEncryptedText });
                 resolve(finalEncryptedText);
