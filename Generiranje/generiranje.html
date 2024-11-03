@@ -9,6 +9,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        padding: 20px;
       }
       .column {
         flex: 1;
@@ -16,6 +17,7 @@
       }
       .column textarea {
         width: 100%;
+        margin-bottom: 20px;
       }
     </style>
   </head>
@@ -30,11 +32,11 @@
       </div>
       <div class="column">
         <h1>Privatni ključ</h1>
-        <textarea id="privatniKljuc" name="privatniKljuc" rows="10" cols="50" readonly></textarea>
+        <textarea class="textarea" id="privatniKljuc" name="privatniKljuc" rows="10" cols="50" readonly></textarea>
       </div>
       <div class="column">
         <h1>Javni ključ</h1>
-        <textarea id="javniKljuc" name="javniKljuc" rows="10" cols="50" readonly></textarea>
+        <textarea class="textarea" id="javniKljuc" name="javniKljuc" rows="10" cols="50" readonly></textarea>
       </div>
     </div>
 
