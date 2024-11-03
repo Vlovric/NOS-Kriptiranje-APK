@@ -80,7 +80,7 @@ function readFromFile(){
       return;
     }
     const filePath = path.join(dir, fileName);
-    const data = fs.readFileSync(filePath);
+    const data = fs.readFileSync(filePath, 'utf8');
     event.reply('read-from-file-reply', data);
   });
 }
