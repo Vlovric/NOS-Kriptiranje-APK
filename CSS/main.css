@@ -66,3 +66,42 @@ body {
 .button:hover {
     background-color: var(--color-20);
 }
+
+.drop-area {
+    border: 2px dashed var(--color-20);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 20px;
+    background-color: var(--color-10);
+    color: var(--color-30);
+  }
+.drop-area:hover {
+    background-color: var(--color-20);
+    color: white;
+}
+
+.button {
+    padding: 10px;
+    background-color: var(--color-30);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+.button:hover {
+    background-color: var(--color-20);
+}
+
+.textarea {
+    width: 48%;
+    background-color: var(--color-10);
+    color: var(--color-30);
+    border: 1px solid var(--color-20);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+  }
