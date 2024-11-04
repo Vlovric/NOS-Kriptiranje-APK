@@ -9,6 +9,7 @@ const files = [
   'javni_kljuc.txt',
   'privatni_kljuc.txt',
   'tajni_kljuc.txt',
+  'verif_sazetak.txt',
 ];
 
 const fileMap = {
@@ -18,12 +19,14 @@ const fileMap = {
   javni_kljuc: 'javni_kljuc.txt',
   privatni_kljuc: 'privatni_kljuc.txt',
   tajni_kljuc: 'tajni_kljuc.txt',
+  verif_sazetak: 'verif_sazetak.txt',
 };
 
 const filesToClear = [
   'kriptirani_tekst.txt',
   'potpis.txt',
   'sazetak.txt',
+  'verif_sazetak.txt',
 ];
 
 const dir = path.join(app.getPath('userData'), 'datoteke');

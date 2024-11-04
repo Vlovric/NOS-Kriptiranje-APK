@@ -24,17 +24,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 try {
                     const privateKey = data.trim(); // Ensure the private key is correctly formatted
 
-                    // Create a hash of the text
+                    
                     const hash = crypto.createHash('sha256').update(text).digest('hex');
                     console.log("Hash teksta je: " + hash);
                     ipcRenderer.send('write-to-file', { fileType: 'sazetak', data: hash });
 
-                    // Sign the hash with the private key
+                    const signature = crypto.privateEncrypt(privateKey, Buffer.from(hash, 'hex')).toString('hex');
+                    
+
+                    
+                    /*
                     const sign = crypto.createSign('SHA256');
                     sign.update(hash);
                     sign.end();
                     const signature = sign.sign(privateKey, 'hex');
-                    console.log("Potpis je: " + signature);
+                    */
 
                     ipcRenderer.send('write-to-file', { fileType: 'potpis', data: signature });
                     resolve({hash, signature});

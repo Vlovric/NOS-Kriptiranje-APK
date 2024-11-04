@@ -32,6 +32,9 @@
         font-size: 24px;
         text-align: center;
       }
+      .invisible-textarea {
+        display: none; /* Make the textarea invisible */
+      }
     </style>
     
   </head>
@@ -42,29 +45,33 @@
       <div class="left-side">
         <div class="drop-areas">
           <div class="drop-area" id="drop-area-1">
-            Dovuci datoteku ili pritisni za odabir datoteke
+            Dovuci datoteku sa tekstom ili pritisni za odabir datoteke
           </div>
           <div class="drop-area" id="drop-area-2">
-            Dovuci datoteku ili pritisni za odabir datoteke
+            Dovuci datoteku sa sažetkom ili pritisni za odabir datoteke
           </div>
         </div>
-        <a class="button" id="sign-button">Potpiši</a>
+        <a class="button" id="verify-button">Verificiraj</a>
         <div id="poruka" class="poruka"></div>
       </div>
       <div class="right-side">
         <div class="column">
-          <h1>Sažetak datoteke</h1>
+          <h1>Sažetak originalne datoteke</h1>
           <textarea class="textarea" id="input-textarea" rows="20" cols="50" readonly></textarea>
         </div>
         <div class="column">
-          <h1>Potpis</h1>
+          <h1>Sažetak dobiven od potpisa</h1>
           <textarea class="textarea" id="output-textarea" rows="20" cols="50" readonly></textarea>
         </div>
       </div>
     </div>
+    <textarea id="invisible-textarea-1" class="invisible-textarea"></textarea>
+    <textarea id="invisible-textarea-2" class="invisible-textarea"></textarea>
 
     
 
     <script src="../Navbar/loadNavbar.js"></script>
+    <script src="../dropArea.js"></script>
+    <script src="verificiranje.js"></script>
   </body>
 </html>
