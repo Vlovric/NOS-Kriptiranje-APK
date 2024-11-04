@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.getElementById('verify-button').addEventListener('click', async () => {
+        document.getElementById('invisible-textarea-1').innerText = '';
+        document.getElementById('invisible-textarea-2').innerText = '';
         const inputText = document.getElementById('invisible-textarea-1').value;
         const signature = document.getElementById('invisible-textarea-2').value;
         try {
@@ -60,3 +62,14 @@ document.addEventListener("DOMContentLoaded", function() {
         messageElement.style.color = result ? 'green' : 'red';
     }
 });
+/*
+trenutno ako je tekst mijenjan onda se hashevi ne poklapaju i vrati false
+ako je potpis mijenjan onda baci error i sve ostane
+*/
+
+/* TODO
+Nakon button pressa clearat oba text area
+Ako je error onda ispisat da je potpis mijenjan
+
+
+*/

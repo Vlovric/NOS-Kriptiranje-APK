@@ -7,6 +7,7 @@ function setupDropArea(dropAreaId, handleFileCallback) {
         fileInput.onchange = (event) => {
             const file = event.target.files[0];
             handleFileCallback(file);
+            dropArea.textContent = file.name;
         };
         fileInput.click();
     });
@@ -28,6 +29,7 @@ function setupDropArea(dropAreaId, handleFileCallback) {
         dropArea.style.color = 'var(--color-30)';
         const file = event.dataTransfer.files[0];
         handleFileCallback(file);
+        dropArea.textContent = file.name;
     });
 }
 
