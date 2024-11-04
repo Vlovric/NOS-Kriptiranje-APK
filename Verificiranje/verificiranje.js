@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.getElementById('verify-button').addEventListener('click', async () => {
-        document.getElementById('invisible-textarea-1').innerText = '';
-        document.getElementById('invisible-textarea-2').innerText = '';
+        document.getElementById('input-textarea').innerText = '';
+        document.getElementById('output-textarea').innerText = '';
         const inputText = document.getElementById('invisible-textarea-1').value;
         const signature = document.getElementById('invisible-textarea-2').value;
         try {
@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
             writeMessage(result);
         } catch (error) {
             console.error('Error encrypting text:', error);
-            writeMessage(false);
+            if(error.message == '3'){
+                writeMessage(3);
+            } else if(error.message == '4'){
+                writeMessage(4);
+            }
         }
     });
 
@@ -37,7 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.log("Javni ključ je: " + publicKey);
 
                     const givenHash = crypto.publicDecrypt(publicKey, Buffer.from(signature, 'hex')).toString('hex');
-                    const result = realHash === givenHash;
+                    const compare = realHash === givenHash;
+                    const result = compare ? 1 : 0;
+
                     
                     /*
                     const verify = crypto.createVerify('SHA256');
@@ -49,7 +55,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     ipcRenderer.send('write-to-file', { fileType: 'verif_sazetak', data: givenHash });
                     resolve({realHash, givenHash, result});
                 } catch (error) {
-                    reject(error);
+                    if (error.message.includes('OPENSSL_internal:BLOCK_TYPE_IS_NOT_01')) {
+                        reject(new Error('3'));
+                    } else if (error.message.includes('DATA_LEN_NOT_EQUAL_TO_MOD_LEN')) {
+                        reject(new Error('4'));
+                    } else {
+                        reject(error);
+                    }
                 }
             });
         });
@@ -57,18 +69,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function writeMessage(result){
         const messageElement = document.getElementById('poruka');
-        const message = result ? 'Potpis je valjan!' : 'Potpis nije valjan!';
+        var message;
+        switch(result){
+            case 0:
+                message = 'Tekst je manipuliran!';
+                messageElement.style.color = 'red';
+                break;
+            case 1:
+                message = 'Potpis je valjan!';
+                messageElement.style.color = 'green';
+                break;
+            case 3:
+                message = 'Potpis je manipuliran!';
+                messageElement.style.color = 'red';
+                break;
+            case 4:
+                message = 'Krivi broj znakova u potpisu!';
+                messageElement.style.color = 'red';
+            default: break;
+        }
         messageElement.innerText = message;
-        messageElement.style.color = result ? 'green' : 'red';
     }
 });
 /*
-trenutno ako je tekst mijenjan onda se hashevi ne poklapaju i vrati false
-ako je potpis mijenjan onda baci error i sve ostane
+OPENSSL_internal:BLOCK_TYPE_IS_NOT_01 - 3
+    ako dobar tekst sa novim potpisom
+    ako promijenjena datoteka sa potpisom al isti broj charactera
+DATA_LEN_NOT_EQUAL_TO_MOD_LEN - 3
+    ako krivi broj charactera u potpisu
 */
 
 /* TODO
-Nakon button pressa clearat oba text area
 Ako je error onda ispisat da je potpis mijenjan
 
 
