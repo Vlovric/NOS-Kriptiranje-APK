@@ -26,11 +26,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     
                     const hash = crypto.createHash('sha256').update(text).digest('hex');
-                    console.log("Hash teksta je: " + hash);
                     ipcRenderer.send('write-to-file', { fileType: 'sazetak', data: hash });
 
                     const signature = crypto.privateEncrypt(privateKey, Buffer.from(hash, 'hex')).toString('hex');
-                    
+
 
                     
                     /*

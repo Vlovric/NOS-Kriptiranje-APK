@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     let encrypted = cipher.update(text, 'utf8', 'hex');
                     encrypted += cipher.final('hex');
                     const encryptedText = iv.toString('hex') + ':' + encrypted;
-                    console.log("Kriptirani tekst je: " + encryptedText);
                     ipcRenderer.send('write-to-file', { fileType: 'kriptirani_tekst', data: encryptedText });
                     resolve(encryptedText);
                 } catch (error) {

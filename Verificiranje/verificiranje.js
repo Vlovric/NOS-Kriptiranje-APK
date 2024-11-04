@@ -36,9 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 try {
                     const publicKey = data.trim();
                     const realHash = crypto.createHash('sha256').update(text).digest('hex');
-                    console.log("Hash teksta je: " + realHash);
-                    console.log("Potpis je: " + signature);
-                    console.log("Javni ključ je: " + publicKey);
 
                     const givenHash = crypto.publicDecrypt(publicKey, Buffer.from(signature, 'hex')).toString('hex');
                     const compare = realHash === givenHash;
