@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
             ipcRenderer.send('read-from-file', { fileType: 'tajni_kljuc' });
             ipcRenderer.once('read-from-file-reply', (event, data) => {
                 try {
-                    const key = Buffer.from(data.trim(), 'hex'); // Ensure the key is a 32-byte buffer
-                    const iv = crypto.randomBytes(16); // Correct IV length
+                    const key = Buffer.from(data.trim(), 'hex');
+                    const iv = crypto.randomBytes(16);
                     const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
                     let encrypted = cipher.update(text, 'utf8', 'hex');
                     encrypted += cipher.final('hex');

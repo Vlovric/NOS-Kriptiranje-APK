@@ -41,14 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     const compare = realHash === givenHash;
                     const result = compare ? 1 : 0;
 
-                    
-                    /*
-                    const verify = crypto.createVerify('SHA256');
-                    verify.update(realHash);
-                    verify.end();
-                    const result = verify.verify(publicKey, signature, 'hex');
-                    */
-
                     ipcRenderer.send('write-to-file', { fileType: 'verif_sazetak', data: givenHash });
                     resolve({realHash, givenHash, result});
                 } catch (error) {
@@ -88,16 +80,3 @@ document.addEventListener("DOMContentLoaded", function() {
         messageElement.innerText = message;
     }
 });
-/*
-OPENSSL_internal:BLOCK_TYPE_IS_NOT_01 - 3
-    ako dobar tekst sa novim potpisom
-    ako promijenjena datoteka sa potpisom al isti broj charactera
-DATA_LEN_NOT_EQUAL_TO_MOD_LEN - 3
-    ako krivi broj charactera u potpisu
-*/
-
-/* TODO
-Ako je error onda ispisat da je potpis mijenjan
-
-
-*/

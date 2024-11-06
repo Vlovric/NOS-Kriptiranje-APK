@@ -50,14 +50,13 @@ function initializeFiles(){
 
   filesToClear.forEach((file) => {
     const filePath = path.join(dir, file);
-    fs.writeFileSync(filePath, ''); // Clear the file content
+    fs.writeFileSync(filePath, '');
   });
 
-  // Ensure other files exist without clearing them
   files.forEach((file) => {
     const filePath = path.join(dir, file);
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, ''); // Create the file only if it doesn't exist
+      fs.writeFileSync(filePath, '');
     }
   });
 }

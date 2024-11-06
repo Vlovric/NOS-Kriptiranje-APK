@@ -22,22 +22,13 @@ document.addEventListener("DOMContentLoaded", function() {
             ipcRenderer.send('read-from-file', { fileType: 'privatni_kljuc' });
             ipcRenderer.once('read-from-file-reply', (event, data) => {
                 try {
-                    const privateKey = data.trim(); // Ensure the private key is correctly formatted
+                    const privateKey = data.trim();
 
                     
                     const hash = crypto.createHash('sha256').update(text).digest('hex');
                     ipcRenderer.send('write-to-file', { fileType: 'sazetak', data: hash });
 
                     const signature = crypto.privateEncrypt(privateKey, Buffer.from(hash, 'hex')).toString('hex');
-
-
-                    
-                    /*
-                    const sign = crypto.createSign('SHA256');
-                    sign.update(hash);
-                    sign.end();
-                    const signature = sign.sign(privateKey, 'hex');
-                    */
 
                     ipcRenderer.send('write-to-file', { fileType: 'potpis', data: signature });
                     resolve({hash, signature});
