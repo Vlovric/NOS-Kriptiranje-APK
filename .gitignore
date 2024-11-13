@@ -130,3 +130,10 @@ dist
 .pnp.*
 package-lock.json
 Plaintext.txt
+datoteke/javni_kljuc.txt
+datoteke/kriptirani_tekst.txt
+datoteke/potpis.txt
+datoteke/privatni_kljuc.txt
+datoteke/sazetak.txt
+datoteke/tajni_kljuc.txt
+datoteke/verif_sazetak.txt

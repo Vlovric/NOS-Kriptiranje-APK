@@ -29,7 +29,9 @@ const filesToClear = [
   'verif_sazetak.txt',
 ];
 
-const dir = path.join(app.getPath('userData'), 'datoteke');
+const isDev = __dirname.includes('Electron_tutorial');
+const exePath = app.getPath('exe');
+const dir = isDev ? path.join(__dirname, 'datoteke') : path.join(path.dirname(exePath), 'datoteke');
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -106,3 +108,5 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
+
+//ne radi bas izlazenje
